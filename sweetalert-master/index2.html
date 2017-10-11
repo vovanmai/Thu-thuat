@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script src="dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<input type="button" name="submit" value="Submit" onclick="myscript()">  
+	<input type="button" name="submit" value="Submit" onclick="myscript1()">  
+	<script>
+		function myscript(){
+			swal("Thêm thành công!", "","success")
+		}
+		function myscript1(){
+			swal({
+			  title: "Bạn có chắc chắn xóa không ?",
+			  text: "",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Có!",
+			  cancelButtonText: "Không!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Xóa thành công!", "", "success");
+			  } else {
+			    swal("Hủy", "", "error");
+			  }
+			});
+					}
+	</script>	
+</body>
+</html>
