@@ -1,0 +1,17 @@
+Cau 1/
+Liet ke ten san pham ,so luong comment san pham do va so danh gia rate cua product do ?
+
+LEFT JOIN comments ON products.id=comments.products_id
+INNER JOIN (SELECT rates.products_id,COUNT(rates.id) as soluong FROM rates GROUP BY rates.products_id) as abc
+ON products.id=abc.products_id
+GROUP BY products.id
+
+
+
+Cau 2/
+Liet ke ten employee, department cua employee and luong cao nhat cua nhan vien do biet rang luong cao nhat nho hon 10000
+
+SELECT employees.name,departments.name,employees.salary
+FROM departments 
+LEFT JOIN employees ON employees.depart_id=departments.id
+WHERE employees.salary IN (SELECT MAX(employees.salary) FROM employees WHERE departments.id=employees.depart_id) AND employees.salary<10000
