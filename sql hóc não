@@ -17,9 +17,89 @@ LEFT JOIN employees ON employees.depart_id=departments.id
 WHERE employees.salary IN (SELECT MAX(employees.salary) FROM employees WHERE departments.id=employees.depart_id) AND employees.salary<10000	
 
 
+SELECT employees.*,departments.* FROM employees 
+INNER JOIN departments ON employees.depart_id=departments.id
+WHERE employees.salary=(SELECT DISTINCT employees.salary FROM employees WHERE employees.depart_id=departments.id ORDER BY employees.salary DESC LIMIT 1,1)
+
 Cau 3/ 
 
 	c1/ Select ten nhan vien va luong cao thu 2 cua nhan vien do.
 	SELECT name,salary FROM employees WHERE salary=(select distinct salary from employees order by salary desc LIMIT 1,1)
 
     c2/
+
+
+SELECT "created_at" AS "date",
+       COALESCE(total_employee_kintais, 0) AS number_of_active_employees,
+       COALESCE(total_employee_payment_requests, 0) AS number_of_applicants,
+       COALESCE(number_of_apply, 0) AS number_of_applications,
+       COALESCE(amount_of_apply, 0) AS application_amount_of_money,
+       COALESCE(turnover, 0) AS sales,
+       CASE
+           WHEN total_employee_payment_requests IS NULL THEN 0
+           ELSE ROUND(COALESCE(number_of_apply, 0)::decimal / total_employee_payment_requests)
+       END AS average_times,
+       CASE
+           WHEN total_employee_payment_requests IS NULL THEN 0
+           ELSE ROUND(COALESCE(amount_of_apply, 0)::decimal / total_employee_payment_requests)
+       END AS average_amount_of_money
+FROM
+  (SELECT generate_series ('2017-12-01 09:30:00'::date, '2017-12-07 09:29:59'::date, '1 day'::interval)::date AS created_at) AS date
+LEFT JOIN
+  (SELECT COUNT(employee_id) AS total_employee_kintais, date
+   FROM
+     (SELECT employee_id,
+             (created_at - interval '9 hours 30 minutes')::date AS date
+      FROM employee_kintais
+      WHERE company_id IN (1,
+                           2,
+                           3,
+                           4,
+                           5,
+                           6,
+                           7,
+                           8,
+                           9,
+                           10)
+      GROUP BY date, employee_id) AS tmp_emk
+   GROUP BY date) AS emk ON "emk"."date" = "date"."created_at"
+LEFT JOIN
+  (SELECT COUNT(id) AS number_of_apply,
+          (applied_at - interval '9 hours 30 minutes')::date AS date,
+          SUM(amount_of_salary + amount_of_transaction_fee + amount_of_kickback_fee + amount_of_transfer_fee + transaction_consumption_tax + kickback_consumption_tax + transfer_consumption_tax) AS amount_of_apply,
+          (SUM(amount_of_transaction_fee) + SUM(amount_of_transfer_fee)) AS turnover
+   FROM employee_payment_requests
+   WHERE company_id IN (1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10)
+     AND status = 2
+   GROUP BY date) AS epr ON "epr"."date" = "date"."created_at"
+LEFT JOIN
+  (SELECT COUNT(employee_id) AS total_employee_payment_requests, date
+   FROM
+     (SELECT employee_id,
+             (applied_at - interval '9 hours 30 minutes')::date AS date
+      FROM employee_payment_requests
+      WHERE company_id IN (1,
+                           2,
+                           3,
+                           4,
+                           5,
+                           6,
+                           7,
+                           8,
+                           9,
+                           10)
+        AND status = 2
+      GROUP BY date, employee_id) AS tmp_eprd
+   GROUP BY date) AS eprd ON "eprd"."date" = "date"."created_at"
+ORDER BY "date" ASC
+LIMIT 30
+OFFSET 0
