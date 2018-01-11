@@ -103,3 +103,15 @@ LEFT JOIN
 ORDER BY "date" ASC
 LIMIT 30
 OFFSET 0
+
+
+
+
+
+
+SELECT (SELECT DISTINCT employee.salary 
+        FROM employee 
+         WHERE department.id=employee.department_id
+        ORDER BY employee.salary DESC LIMIT 1,1) AS LuongCaoThu2, department.name
+FROM  employee JOIN department ON employee.department_id=department.id
+GROUP BY department.id
