@@ -28,3 +28,8 @@ Request off thì tag Sasaki nữa
 
 How to run task schedule : 
 Step1 : crontab -e and pass  * * * * * php /var/www/html/enigma-trans/enigma-trans-company-backend/artisan schedule:run >> /dev/null 2>&1
+
+
+
+================================ Vue.js ===========================
+https://laravel-news.com/using-vue-router-laravel
