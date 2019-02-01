@@ -1,1 +1,13 @@
+1/ Xem toàn bộ containers chưa starting 
+      docker ps -a
+******************************************************* 
 
+2/ Xem toàn bộ containers đang starting:
+   docker ps
+******************************************************     
+
+3/ Xem tất cả các images đang có: 
+   docker images
+********************************************************
+
+4/
