@@ -10,4 +10,26 @@
    docker images
 ********************************************************
 
-4/
+4/ Các pull 1 image về máy: 
+   docker pull image_name
+*******************************************************
+
+5/ Tạo một container từ một image:
+  docker create -p 8000:80 image_name
+*******************************************************
+
+6/ Start một container:
+   docker start containerId
+******************************************************   
+  
+7/ Stop container đang chạy
+  docker stop containerId
+  ***************************************************
+
+8/ Xóa container đang tồn tại
+  docker rm containerId
+********************************************************  
+
+
+9/ Stop tất cả container đang chạy
+  docker stop $(docker ps -qa)
