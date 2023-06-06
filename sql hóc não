@@ -115,3 +115,21 @@ SELECT (SELECT DISTINCT employee.salary
         ORDER BY employee.salary DESC LIMIT 1,1) AS LuongCaoThu2, department.name
 FROM  employee JOIN department ON employee.department_id=department.id
 GROUP BY department.id
+
+
+
+select *
+from lessons
+where exists (
+   select 1 
+   from chapters
+   where chapters.id = lessons.chapter_id
+   and exits (
+       select 1
+       from courses
+       where courses.id = chapters.course_id
+   )
+)
+
+
+
