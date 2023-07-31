@@ -1,43 +1,5 @@
-
- ./vendor/bin/phpcs --standard=build/phpcs.xml tests/ReportLoginByCompanyTest.php
- 
- 
- 
- https://admin.dev.trans.enigma.bz/
-https://company.dev.trans.enigma.bz/
-https://pay.dev.trans.enigma.bz/
-　https://company.stg.trans.enigma.bz/signIn
-・メンテナンス設定/setting maintenance
-　https://admin.stg.trans.enigma.bz/maintenance/setting
- 
- 
- 
- 
- 
- REDIS_HOST=redis
-QUEUE_DRIVER=redis
-AWS_SQS_QUEUE_IMPORT=sqs_enigma
-mở docker redis
-php artisan queue:listen redis --queue=sqs_enigma
-
-
-
-Request off thì tag Sasaki nữa
-
-
-
-How to run task schedule : 
-Step1 : crontab -e and pass  * * * * * php /var/www/html/enigma-trans/enigma-trans-company-backend/artisan schedule:run >> /dev/null 2>&1
-
-
-
-================================ Vue.js ===========================
-https://laravel-news.com/using-vue-router-laravel
-https://www.youtube.com/watch?v=Fn9sn-Meb_I
-https://www.youtube.com/watch?v=DJ6PD_jBtU0&t=2284s
-======================================================================
-Request off thì tag Sasaki nữa
-==================================================================
-enigma3
-52NweT2Z
-====================================================================
+cd ~/.config/JetBrains/PhpStorm2020.3
+rm eval/PhpStorm*evaluation.key
+rm options/other.xml
+cd ~/.java/.userPrefs/jetbrains
+rm -rf phpstorm
