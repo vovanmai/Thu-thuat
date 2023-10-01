@@ -3,3 +3,5 @@ rm eval/PhpStorm*evaluation.key
 rm options/other.xml
 cd ~/.java/.userPrefs/jetbrains
 rm -rf phpstorm
+
+password github: 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
