@@ -4,5 +4,4 @@ rm options/other.xml
 cd ~/.java/.userPrefs/jetbrains
 rm -rf phpstorm
 
-password github: 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
-password github: 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
+password github: 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
